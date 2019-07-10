@@ -1,0 +1,63 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+</div>
+<div class="col-md-12">
+  <h4>
+      Add New User
+  </h4>
+  <form>
+    <a [routerLink]="['/reg-user']">New component</a>
+    <br />
+    <div class="table-responsive table-container">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td><input class="form-control" placeholder="Id" id/></td>
+            <td><input class="form-control" placeholder="Name"/></td>
+            <td><input class="form-control" placeholder="Age"/></td>
+            <td><input class="form-control" placeholder="Email"/></td>
+            <td><input class="form-control" placeholder="Post"/></td>
+            <td><button class="button" id="Add">Add Employee</button>
+            <!-- <button class="button" (click)="updateEmp(emp)" id="Update" >Update Data</button></td>
+            <button class="button" (click)="cancelEmp" id="cancel" >Cancel</button></td> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </form>
+</div>
+<div class="col-md-12">
+  <h4> User Details</h4>
+  <div class="table-responsive table-container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Emp Id</th>
+          <th>Employee Name</th>
+          <th>Age</th>
+          <th>Email</th>
+          <th>Post</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>001</td>
+          <td>Shakti Prakash</td>
+          <td>26</td>
+          <td>shakti_prakash@outlook.com</td>
+          <td>Developer</td>
+          <td>
+              <button  class="btn btn-info"> Edit</button>
+              <button  style="margin-left: 20px;" class="btn btn-info"> Delete</button>
+            <!-- <button (click)="editEmp(emp)" class="btn btn-info"> Edit</button>
+            <button (click)="deleteEmp(emp)" style="margin-left: 20px;" class="btn btn-info"> Delete</button> -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
