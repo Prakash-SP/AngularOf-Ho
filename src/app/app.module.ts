@@ -1,38 +1,33 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule} from '@angular/router';
+
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RegUserComponent } from './reg-user/reg-user.component';
-import { CrudempserService } from './crudempser.service';
-import {HttpClientModule} from '@angular/common/http';
+import { EmployeeCreateComponent } from './employee-create/employee-create.component';
+import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
+import { EmployeeUpdateComponent } from './employee-update/employee-update.component';
+import { EmployeesListComponent } from './employees-list/employees-list.component';
+import { HttpClientModule } from '@angular/common/http';
+// Forms module
+import { FormsModule } from '@angular/forms';
+// import { EmployeeEditComponent } from './employee-edit/employee-edit.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegUserComponent
+    EmployeeCreateComponent,
+    EmployeeDetailsComponent,
+    EmployeeUpdateComponent,
+    EmployeesListComponent
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     HttpClientModule,
-    RouterModule.forRoot([
-      {
-        path: 'home',
-        component: AppComponent
-      },
-      {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: 'home'
-      },
-      {
-      path: 'reg-user',
-      component: RegUserComponent
-      }
-    ])
+    FormsModule
   ],
-  providers: [
-    CrudempserService
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

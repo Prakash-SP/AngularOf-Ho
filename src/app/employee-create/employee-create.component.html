@@ -1,0 +1,23 @@
+<div class="container custom-container">
+  <div class="col-md-12">
+    <h3 class="mb-3 text-center">Create Employee</h3>
+    <div class="table-responsive table-container">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td><input type="text" [(ngModel)]="employeeDetails.Id" class="form-control" placeholder="Id" id/></td>
+            <td><input type="text" [(ngModel)]="employeeDetails.Name" class="form-control" placeholder="Name"/></td>
+            <td><input type="number" [(ngModel)]="employeeDetails.Age" class="form-control" placeholder="Age"/></td>
+            <td><input type="text" [(ngModel)]="employeeDetails.Email" class="form-control" placeholder="Email"/></td>
+            <td><input type="text" [(ngModel)]="employeeDetails.Post" class="form-control" placeholder="Post"/></td>
+            <td><div class="btn-size"><button class="btn btn-success" (click)="addEmployee()" id="Add">Add Employee</button></div></td>
+            <!-- <button class="button" (click)="updateEmp(emp)" id="Update" >Update Data</button></td>
+            <button class="button" (click)="cancelEmp" id="cancel" >Cancel</button>
+            <button class="button" (click)="resetEmp" id="reset" >Reset</button></td> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <a  class="btn btn-primary right float-right" [routerLink]="[ '/employees-list']">Cancel</a>
+  </div>
+</div>

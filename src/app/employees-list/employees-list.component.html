@@ -1,0 +1,41 @@
+<div class="container custom-container-2">
+
+  <!-- Show it when there is no employee -->
+  <div class="no-data text-center" *ngIf="Employee.length == 0">
+    <p>There is no employee added yet!</p>
+    <button class="btn btn-outline-primary" routerLink="/create-employee">Add Empoyee</button>
+  </div>
+
+  <!-- Employees list table, it hides when there is no employee -->
+  <div *ngIf="Employee.length !== 0">
+    <h3 class="mb-3 text-center">Employees List</h3>
+    <button class="btn btn-outline-primary" routerLink="/create-employee">Add Empoyee</button>
+    <div class="col-md-12">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">User Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Age</th>
+            <th scope="col">Email</th>
+            <th scope="col">Post</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let employee of Employee'>
+            <td>{{employee.Id}}</td>
+            <td>{{employee.Name}}</td>
+            <td>{{employee.Age}}</td>
+            <td>{{employee.Email}}</td>
+            <td>{{employee.Post}}</td>
+            <td>
+              <a  class="btn btn-primary" [routerLink]="[ '/update-employee']" [queryParams]="{ Id: employee.Id}">Edit</a>
+              <a class="btn btn-danger text-white ml-2" (click)="deleteEmployee(employee.Id)">Delete</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
