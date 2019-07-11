@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Employee } from '../shared/employee';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
@@ -35,7 +35,7 @@ export class RestApiService {
 
      // HttpClient API get() method => Fetch employee
   getEmployee(Id): Observable<Employee> {
-    return this.http.get<Employee>(this.apiURL + '/GetEmpData' + Id)
+    return this.http.get<Employee>(this.apiURL + '/GetEmpById?Id='+ Id)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -53,7 +53,7 @@ export class RestApiService {
 
   // HttpClient API put() method => Update employee
   updateEmployee(Id, employee): Observable<Employee> {
-    return this.http.put<Employee>(this.apiURL + '/UpdateEmpData' + Id, employee, this.httpOptions)
+    return this.http.put<Employee>(this.apiURL + '/UpdateEmpData', employee, this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)

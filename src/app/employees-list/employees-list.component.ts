@@ -27,7 +27,6 @@ export class EmployeesListComponent implements OnInit {
   deleteEmployee(Id) {
     if (window.confirm('Are you sure, you want to delete?')) {
      this.restApi.deleteEmployee(Id).subscribe(data => {
-        console.log(data);
         this.loadEmployees();
       });
     }
