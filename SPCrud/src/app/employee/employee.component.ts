@@ -37,7 +37,7 @@ export class EmployeeComponent implements OnInit {
     });
   }
 
-  // Delete employee
+  // Delete employee by sending data in body
   deleteEmployee(Id) {
     if (window.confirm('Are you sure, you want to delete?')) {
      this.restApi.deleteEmployee(Id).subscribe(data => {
@@ -46,6 +46,14 @@ export class EmployeeComponent implements OnInit {
     }
   }
 
+  // Delete employee by sending data in body
+  deleteEmplbq(Id) {
+    if (window.confirm('Are you sure, you want to delete?')) {
+     this.restApi.deleteEmpBQ(Id).subscribe(data => {
+        this.loadEmployees();
+      });
+    }
+  }
   
   //Edit employee
   edit(Id,Name,Age,Email,Post){

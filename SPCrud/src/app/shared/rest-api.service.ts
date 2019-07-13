@@ -67,6 +67,15 @@ export class RestApiService {
   .pipe( retry(1), catchError( this.handleError ));
 }
 
+// HttpClient API delete() method => Delete employee
+deleteEmpBQ(Id) {
+   return this.http.delete<Employee>(this.apiURL + '/DeleteEmpData?Id='+Id, this.httpOptions)
+   .pipe(
+     retry(1),
+     catchError(this.handleError)
+   );
+}
+
   // Error handling
   handleError(error) {
      let errorMessage = '';
