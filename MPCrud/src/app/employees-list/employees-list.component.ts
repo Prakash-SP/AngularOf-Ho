@@ -9,9 +9,11 @@ import { RestApiService } from '../shared/rest-api.service';
 export class EmployeesListComponent implements OnInit {
 
   Employee: any = [];
+
   constructor(
     public restApi: RestApiService
   ) { }
+  
   ngOnInit() {
     this.loadEmployees();
   }
@@ -31,5 +33,4 @@ export class EmployeesListComponent implements OnInit {
       });
     }
   }
-
 }
