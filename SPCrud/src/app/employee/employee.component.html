@@ -1,22 +1,13 @@
 <div class="container custom-container">
   <div class="col-md-12">
     <h3 class="mb-3 text-center">Create Employee</h3>
-    <div class="table-responsive table-container">
-      <table>
-        <tbody>
-          <tr>
-            <td><input type="text" [(ngModel)]="employeeDetails.Id" class="form-control" placeholder="Emp Id" id="eid" /></td>
-            <td><input type="text" [(ngModel)]="employeeDetails.Name" class="form-control" placeholder="Name" id="name"/></td>
-            <td><input type="number" [(ngModel)]="employeeDetails.Age" class="form-control" placeholder="Age" id="age"/></td>
-            <td><input type="text" [(ngModel)]="employeeDetails.Email" class="form-control" placeholder="Email" id="mail"/></td>
-            <td><input type="text" [(ngModel)]="employeeDetails.Post" class="form-control" placeholder="Post" id="post"/></td>
-            <td><div class="btn-size" *ngIf="isEdit===false"><button class="btn btn-success" (click)="addEmployee()">Add Employee</button></div>
-              <div class="ubtn-size" *ngIf="isEdit===true"><button class="btn btn-success" (click)="updateEmployee()">Update Employee</button><button class="btn btn-danger ml-3" (click)="reset()">Cancel</button></div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      <div><input type="text" [(ngModel)]="employeeDetails.Id" class="form-control" placeholder="Emp Id" id="eid" /></div>
+      <div><input type="text" [(ngModel)]="employeeDetails.Name" class="form-control" placeholder="Name" id="name"/></div>
+      <div><input type="number" [(ngModel)]="employeeDetails.Age" class="form-control" placeholder="Age" id="age"/></div>
+      <div><input type="text" [(ngModel)]="employeeDetails.Email" class="form-control" placeholder="Email" id="mail"/></div>
+      <div><input type="text" [(ngModel)]="employeeDetails.Post" class="form-control" placeholder="Post" id="post"/></div>
+      <div><div class="btn-size" *ngIf="isEdit===false"><button class="btn btn-success" (click)="addEmployee()">Add Employee</button></div>
+      <div class="ubtn-size" *ngIf="isEdit===true"><button class="btn btn-success" (click)="updateEmployee()">Update Employee</button><button class="btn btn-danger ml-3" (click)="reset()">Cancel</button></div></div> 
   </div>
 </div>
 <hr style="height: 75px; width:0%">
@@ -32,32 +23,34 @@
   <!-- <div *ngIf="Employee.length != 0"> -->
     <h3 class="mb-3 text-center">Employees List</h3>
     <div class="col-md-12">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th scope="col">Emp Id</th>
-            <th scope="col">Name</th>
-            <th scope="col">Age</th>
-            <th scope="col">Email</th>
-            <th scope="col">Post</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor='let employee of Employee'>
-            <td>{{employee.Id}}</td>
-            <td>{{employee.Name}}</td>
-            <td>{{employee.Age}}</td>
-            <td>{{employee.Email}}</td>
-            <td>{{employee.Post}}</td>
-            <td>
-              <a (click)="edit(employee.Id,employee.Name,employee.Age,employee.Email,employee.Post)"  class="btn btn-primary">Edit</a>
-              <a class="btn btn-danger text-white ml-2" (click)="deleteEmployee(employee.Id)">Deletebb</a>
-              <a class="btn btn-danger text-white ml-2" (click)="deleteEmplbq(employee.Id)">Deletebq</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-responsive table-container">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Emp Id</th>
+              <th scope="col">Name</th>
+              <th scope="col">Age</th>
+              <th scope="col">Email</th>
+              <th scope="col">Post</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor='let employee of Employee'>
+              <td>{{employee.Id}}</td>
+              <td>{{employee.Name}}</td>
+              <td>{{employee.Age}}</td>
+              <td>{{employee.Email}}</td>
+              <td>{{employee.Post}}</td>
+              <td>
+                <a (click)="edit(employee.Id,employee.Name,employee.Age,employee.Email,employee.Post)"  class="btn btn-primary">Edit</a>
+                <a class="btn btn-danger text-white ml-2" (click)="deleteEmployee(employee.Id)">Deletebb</a>
+                <a class="btn btn-danger text-white ml-2" (click)="deleteEmplbq(employee.Id)">Deletebq</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
     </div>
   </div>
   <!-- </div> -->

@@ -3,13 +3,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Employee } from '../shared/employee';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestApiService {
   // Define API
-  apiURL = 'http://localhost:1338/Login.svc';
+  apiURL = environment.baseUrl;
 
   constructor(private http: HttpClient) { }
 
