@@ -9,10 +9,10 @@ import { RestApiService } from '../shared/rest-api.service';
 })
 export class EmployeeComponent implements OnInit {
 
-  @Input() employeeDetails = { Id: '', Name: '', Age: '', Email: '', Post: '' };
+  @Input() employeeDetails = { Id: '', Name: '',Dob:'',Gender:'', Email: '', Post: '' };
   Employee: any = [];
   isEdit = false;
-
+  Gender=['Male','Female','Others']
   constructor(
     public restApi: RestApiService,
     public router: Router
@@ -56,9 +56,9 @@ export class EmployeeComponent implements OnInit {
   }
   
   //Edit employee
-  edit(Id,Name,Age,Email,Post){
+  edit(Id,Name,Dob,Age,Gender,Email,Post){
     this.isEdit = true
-    this.employeeDetails = { Id: Id, Name: Name, Age: Age, Email: Email, Post: Post }
+    this.employeeDetails = { Id: Id, Name: Name,Dob:Dob, Gender:Gender, Email: Email, Post: Post }
   }
 
   // Update employee
@@ -74,7 +74,7 @@ export class EmployeeComponent implements OnInit {
   reset()
   {
     this.isEdit = false
-   this.employeeDetails = { Id: '', Name: '', Age: '', Email: '', Post: '' }
+   this.employeeDetails = {Id: '', Name: '',Dob:'', Gender:'', Email: '', Post: ''}
   }
 
 }
