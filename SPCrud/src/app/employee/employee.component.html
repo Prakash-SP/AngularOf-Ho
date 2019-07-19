@@ -1,20 +1,37 @@
 <div class="container custom-container">
   <div class="col-md-12">
     <h3 class="mb-3 text-center">Create Employee</h3>
+    <form (ngSubmit)="addEmployee()" #heroForm="ngForm">
     <div class="row form-group">
-      <div class="col-md-3"><input type="text" [(ngModel)]="employeeDetails.Id" class="form-control" placeholder="Emp Id" name="eid" /></div>
-      <div class="col-md-3"><input type="text" [(ngModel)]="employeeDetails.Name" class="form-control" placeholder="Name" name="name"/></div>
-      <div class="col-md-3"><input type="date" name="dob" [(ngModel)]="employeeDetails.Dob" class="form-control" /></div>
-      <div class="col-md-3"><input type="text" class="form-control" name="age" readonly /></div>
+      <div class="col-md-3">
+        <input type="text" [(ngModel)]="employeeDetails.Id" required name="eid" #eid="ngModel" class="form-control" placeholder="Emp Id" />
+        <span [hidden]="eid.valid || eid.pristine" class="badge badge-danger">
+        EmpId is required
+      </span>
+      <!-- <input type="file" /> -->
+    </div> 
+      <div class="col-md-3"><input type="text" [(ngModel)]="employeeDetails.Name" required name="name" #name="ngModel" class="form-control" placeholder="Name"/><span [hidden]="name.valid || name.pristine" class="badge badge-danger">
+        Name is required
+      </span></div>
+      <div class="col-md-3"><input type="date" (change)="onDateSelect($event)" name="dob" [(ngModel)]="employeeDetails.Dob" class="form-control" /></div>
+      <div class="col-md-3"><input [(ngModel)]="employeeDetails.Age" type="text" class="form-control" name="age" readonly /></div>
     </div>
     <div class="row form-group">
-        <div class="col-md-3"><select [(ngModel)]="employeeDetails.Gender" class="form-control" placeholder="Gender" name="gender"><option value="">Select Gender</option><option *ngFor="let val of Gender" >{{val}}</option></select></div>
-      <div class="col-md-3"><input type="text" [(ngModel)]="employeeDetails.Email" class="form-control" placeholder="Email" id="mail"/></div>
-      <div class="col-md-6"><textarea [(ngModel)]="employeeDetails.Post" style="resize:none" class="form-control" placeholder="Post" id="post"></textarea></div>
+        <div class="col-md-3"><select [(ngModel)]="employeeDetails.Gender" required name="gender" #gender="ngModel" class="form-control" placeholder="Gender" name="gender"><option value="">Select Gender</option><option *ngFor="let val of Gender" >{{val}}</option></select><span [hidden]="gender.valid || gender.pristine" class="badge badge-danger">
+          Gender is required
+        </span></div>
+      <div class="col-md-3"><input type="text" [(ngModel)]="employeeDetails.Email" required name="email" #email="ngModel" class="form-control" placeholder="Email" name="email"/><span [hidden]="email.valid || email.pristine" class="badge badge-danger">
+        Email is required
+      </span></div>
+      <div class="col-md-6"><textarea [(ngModel)]="employeeDetails.Post" required name="post" #post="ngModel" style="resize:none" class="form-control" placeholder="Post" ></textarea><span [hidden]="post.valid || post.pristine" class="badge badge-danger">
+        Post is Required
+      </span></div>
     </div>
     <div class="row form-group float-right">
-      <div class="btn-size" *ngIf="isEdit===false"><button class="btn btn-success" (click)="addEmployee()">Add Employee</button></div>
-      <div class="ubtn-size" *ngIf="isEdit===true"><button class="btn btn-success" (click)="updateEmployee()">Update Employee</button><button class="btn btn-danger ml-3" (click)="reset()">Cancel</button></div></div> 
+      <div class="btn-size" *ngIf="isEdit===false"><button class="btn btn-success" type="submit" [disabled]="!heroForm.form.valid">Add Employee</button></div>
+      <div class="ubtn-size" *ngIf="isEdit===true"><button class="btn btn-success" (click)="updateEmployee()">Update Employee</button><button class="btn btn-danger ml-3" (click)="reset()">Cancel</button></div>
+    </div> 
+  </form>
   </div>
 </div>
 <hr style="height: 75px; width:0%">

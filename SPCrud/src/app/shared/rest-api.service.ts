@@ -34,7 +34,7 @@ export class RestApiService {
       );
     }
 
-  // HttpClient API post() method => Create employee
+  //HttpClient API post() method => Create employee
   createEmployee(employee): Observable<Employee> {
     return this.http.post<Employee>(this.apiURL + '/RegEmp', employee, this.httpOptions)
     .pipe(

@@ -1,7 +1,7 @@
 export class Employee {
     Id: string;
     Name: string;
-    Dob:string;
+    Dob:Date;
     Age: number;
     Email: string;
     Gender: string;

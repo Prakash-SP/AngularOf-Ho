@@ -9,9 +9,11 @@ import { RestApiService } from '../shared/rest-api.service';
 })
 export class EmployeeComponent implements OnInit {
 
-  @Input() employeeDetails = { Id: '', Name: '',Dob:'',Gender:'', Email: '', Post: '' };
+  @Input() employeeDetails = { Id: '', Name: '',Dob:'',Age:null, Gender:'', Email: '', Post: '' };
   Employee: any = [];
   isEdit = false;
+  bday:any=null;
+  age:number=null;
   Gender=['Male','Female','Others']
   constructor(
     public restApi: RestApiService,
@@ -25,12 +27,14 @@ export class EmployeeComponent implements OnInit {
    // Get employees list
    loadEmployees() {
     return this.restApi.getEmployees().subscribe((data: {}) => {
+      console.log(data)
       this.Employee = data;
     });
   }
 
   // Add employee
-  addEmployee(dataEmployee) {
+  addEmployee() {
+    delete this.employeeDetails.Age;
     this.restApi.createEmployee(this.employeeDetails).subscribe((data: {}) => {
       this.reset();
       this.loadEmployees();
@@ -56,9 +60,10 @@ export class EmployeeComponent implements OnInit {
   }
   
   //Edit employee
-  edit(Id,Name,Dob,Age,Gender,Email,Post){
+  edit(Id,Name,Dob,Gender,Email,Post){
+    let getage=this.calcAge(Dob)
     this.isEdit = true
-    this.employeeDetails = { Id: Id, Name: Name,Dob:Dob, Gender:Gender, Email: Email, Post: Post }
+    this.employeeDetails = { Id: Id, Name: Name,Dob:Dob,Age:getage, Gender:Gender, Email: Email, Post: Post }
   }
 
   // Update employee
@@ -71,10 +76,24 @@ export class EmployeeComponent implements OnInit {
     }
   }
 
+  calcAge(birthdate){
+      const bdate = new Date(birthdate);
+      const timeDiff = Math.abs(Date.now() - bdate.getTime() );
+      this.age = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365)
+      return this.age;
+  }
+
+  onDateSelect(event:Event){
+    this.bday=(<HTMLInputElement>event.target).value;
+    let getage=this.calcAge(this.bday)
+    this.employeeDetails.Age =getage;
+    return this.age;
+  }
+
   reset()
   {
     this.isEdit = false
-   this.employeeDetails = {Id: '', Name: '',Dob:'', Gender:'', Email: '', Post: ''}
+   this.employeeDetails = {Id: '', Name: '',Dob:'',Age:null, Gender:'', Email: '', Post: ''}
   }
 
 }
