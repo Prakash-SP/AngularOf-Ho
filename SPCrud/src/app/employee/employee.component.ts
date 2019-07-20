@@ -1,6 +1,8 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { RestApiService } from '../shared/rest-api.service';
+import { DomSanitizer } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-employee',
@@ -9,13 +11,16 @@ import { RestApiService } from '../shared/rest-api.service';
 })
 export class EmployeeComponent implements OnInit {
 
-  @Input() employeeDetails = { Id: '', Name: '',Dob:'',Age:null, Gender:'', Email: '', Post: '' };
+  @Input() employeeDetails = { Id: '', Name: '',Dob:'',Age:null, Gender:'', Email: '', Post: '',Image:'' };
   Employee: any = [];
   isEdit = false;
   bday:any=null;
   age:number=null;
+  files:any=[];
+  filestring:any='';
   Gender=['Male','Female','Others']
   constructor(
+    public sanitizer:DomSanitizer,
     public restApi: RestApiService,
     public router: Router
   ) { }
@@ -27,7 +32,6 @@ export class EmployeeComponent implements OnInit {
    // Get employees list
    loadEmployees() {
     return this.restApi.getEmployees().subscribe((data: {}) => {
-      console.log(data)
       this.Employee = data;
     });
   }
@@ -35,6 +39,7 @@ export class EmployeeComponent implements OnInit {
   // Add employee
   addEmployee() {
     delete this.employeeDetails.Age;
+    this.employeeDetails.Image=this.filestring;
     this.restApi.createEmployee(this.employeeDetails).subscribe((data: {}) => {
       this.reset();
       this.loadEmployees();
@@ -60,10 +65,10 @@ export class EmployeeComponent implements OnInit {
   }
   
   //Edit employee
-  edit(Id,Name,Dob,Gender,Email,Post){
+  edit(Id,Name,Dob,Gender,Email,Post,Photo){
     let getage=this.calcAge(Dob)
     this.isEdit = true
-    this.employeeDetails = { Id: Id, Name: Name,Dob:Dob,Age:getage, Gender:Gender, Email: Email, Post: Post }
+    this.employeeDetails = { Id: Id, Name: Name,Dob:Dob,Age:getage, Gender:Gender, Email: Email, Post: Post,Image:Photo }
   }
 
   // Update employee
@@ -90,10 +95,26 @@ export class EmployeeComponent implements OnInit {
     return this.age;
   }
 
+  getFiles(event) {
+    this.files = event.target.files;
+    var reader = new FileReader();
+    reader.onload = this._handleReaderLoaded.bind(this);
+    reader.readAsBinaryString(this.files[0]);
+}
+
+_handleReaderLoaded(readerEvt) {
+    var binaryString = readerEvt.target.result;
+    this.filestring = btoa(binaryString);  // Converting binary string data.
+    // this.transform(this.filestring);
+}
+
+// transform(imgvar){
+//   return this.sanitizer.bypassSecurityTrustResourceUrl(imgvar);
+// }
   reset()
   {
     this.isEdit = false
-   this.employeeDetails = {Id: '', Name: '',Dob:'',Age:null, Gender:'', Email: '', Post: ''}
+   this.employeeDetails = {Id: '', Name: '',Dob:'',Age:null, Gender:'', Email: '', Post: '',Image:''}
   }
 
 }

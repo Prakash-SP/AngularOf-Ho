@@ -1,14 +1,13 @@
 <div class="container custom-container">
   <div class="col-md-12">
     <h3 class="mb-3 text-center">Create Employee</h3>
-    <form (ngSubmit)="addEmployee()" #heroForm="ngForm">
+    <form  #heroForm="ngForm">
     <div class="row form-group">
       <div class="col-md-3">
         <input type="text" [(ngModel)]="employeeDetails.Id" required name="eid" #eid="ngModel" class="form-control" placeholder="Emp Id" />
         <span [hidden]="eid.valid || eid.pristine" class="badge badge-danger">
         EmpId is required
       </span>
-      <!-- <input type="file" /> -->
     </div> 
       <div class="col-md-3"><input type="text" [(ngModel)]="employeeDetails.Name" required name="name" #name="ngModel" class="form-control" placeholder="Name"/><span [hidden]="name.valid || name.pristine" class="badge badge-danger">
         Name is required
@@ -27,8 +26,14 @@
         Post is Required
       </span></div>
     </div>
+
+    <input type="file" class="form-control browse" [(ngModel)]="employeeDetails.Image" name="Image" (change)="getFiles($event)"/>
+    <div>
+      <img [src]="sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,'+filestring)" style="height:100px;width:100px" />
+    </div>
+ 
     <div class="row form-group float-right">
-      <div class="btn-size" *ngIf="isEdit===false"><button class="btn btn-success" type="submit" [disabled]="!heroForm.form.valid">Add Employee</button></div>
+      <div class="btn-size" *ngIf="isEdit===false"><button class="btn btn-success" [disabled]="!heroForm.form.valid" (click)="addEmployee()">Add Employee</button></div>
       <div class="ubtn-size" *ngIf="isEdit===true"><button class="btn btn-success" (click)="updateEmployee()">Update Employee</button><button class="btn btn-danger ml-3" (click)="reset()">Cancel</button></div>
     </div> 
   </form>
