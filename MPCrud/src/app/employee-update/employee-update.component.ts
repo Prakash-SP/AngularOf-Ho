@@ -16,9 +16,8 @@ export class EmployeeUpdateComponent implements OnInit {
   bday:any=null;
   age:number=null;
   files:any=[];
-  fileString:any='';
+  imageString:any='';
   imageName = ''
-  fileName:any='';
   Gender=['Male','Female','Others']
   constructor(
     public sanitizer:DomSanitizer,
@@ -49,7 +48,7 @@ export class EmployeeUpdateComponent implements OnInit {
         this.employeeData.Gender = element.Gender
         this.employeeData.Email = element.Email
         this.employeeData.Post = element.Post
-        this.fileString = element.Image
+        this.imageString = element.Image
         this.imageName = element.ImageName
         
       });
@@ -59,8 +58,8 @@ export class EmployeeUpdateComponent implements OnInit {
   // Update employee data
   updateEmployee() {
     delete this.employeeData.Age;
-    this.employeeData.Image=this.fileString;
-    this.employeeData.ImageName=this.fileName;
+    this.employeeData.Image=this.imageString;
+    this.employeeData.ImageName=this.imageName;
     if (window.confirm('Are you sure, you want to update?')) {
       this.restApi.updateEmployee(this.Id, this.employeeData).subscribe(data => {
         this.router.navigate(['/employees-list']);
@@ -97,14 +96,14 @@ export class EmployeeUpdateComponent implements OnInit {
     this.files = event.target.files;
     var reader = new FileReader();
     let file = event.target.files[0];
-    this.fileName = file.name;
+    this.imageName = file.name;
     reader.onload = this._handleReaderLoaded.bind(this);
     reader.readAsBinaryString(this.files[0]);
   }
 
   _handleReaderLoaded(readerEvt) {
     var binaryString = readerEvt.target.result;
-    this.fileString = btoa(binaryString);  // Converting binary string data.
+    this.imageString = btoa(binaryString);  // Converting binary string data.
     // this.transform(this.filestring);
   }
 
