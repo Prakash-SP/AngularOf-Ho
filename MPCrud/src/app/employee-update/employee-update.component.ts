@@ -37,7 +37,8 @@ export class EmployeeUpdateComponent implements OnInit {
 
   // Get employees data
   fetchEmpData() {
-    return this.restApi.getEmployee(this.Id).subscribe((data: {}) => {
+    // return this.restApi.getEmployee(this.Id).subscribe((data: {}) => {
+      return this.restApi.getEmployee(this.Id).subscribe((data) => {
       this.Employee = data;
       this.Employee.forEach(element => {
         this.employeeData.Id = element.Id
