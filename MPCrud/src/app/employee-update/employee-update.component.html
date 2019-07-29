@@ -1,23 +1,42 @@
 <div class="container custom-container">
-  <div class="col-md-12">
-    <h3 class="mb-3 text-center">Create Employee</h3>
-    <div class="table-responsive table-container">
-      <table class="table">
-        <tbody>
-          <tr>
-            <td><input type="text" [(ngModel)]="employeeData.Id" class="form-control" placeholder="Id"/></td>
-            <td><input type="text" [(ngModel)]="employeeData.Name" class="form-control" placeholder="Name"/></td>
-            <td><input type="number" [(ngModel)]="employeeData.Age" class="form-control" placeholder="Age"/></td>
-            <td><input type="text" [(ngModel)]="employeeData.Email" class="form-control" placeholder="Email"/></td>
-            <td><input type="text" [(ngModel)]="employeeData.Post" class="form-control" placeholder="Post"/></td>
-            <td><div class="btn-size"><button class="btn btn-success" (click)="updateEmployee()" id="updateEmp">Update Data</button></div></td>
-            <!-- <button class="button" (click)="updateEmp(emp)" id="Update" >Update Data</button></td>
-            <button class="button" (click)="cancelEmp" id="cancel" >Cancel</button>
-            <button class="button" (click)="resetEmp" id="reset" >Reset</button></td> -->
-          </tr>
-        </tbody>
-      </table>
+    <div class="col-md-12">
+      <h3 class="mb-3 text-center">Create Employee</h3>
+      <form  #empForm="ngForm">
+      <div class="row form-group">
+        <div class="col-md-3">
+          <input type="text" [(ngModel)]="employeeData.Id" required name="eid" #eid="ngModel" class="form-control" placeholder="Emp Id" />
+        </div>
+        <div class="col-md-3">
+          <input type="text" [(ngModel)]="employeeData.Name" required name="name" #name="ngModel" class="form-control" placeholder="Name"/>
+        </div>  
+        <div class="col-md-3">
+          <input type="date" (change)="onDateSelect($event)" name="dob" [(ngModel)]="employeeData.Dob" class="form-control" />
+        </div>
+        <div class="col-md-3">
+          <input [(ngModel)]="employeeData.Age" type="text" class="form-control" name="age" readonly />
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-3">
+          <select [(ngModel)]="employeeData.Gender" required name="gender" #gender="ngModel" class="form-control" placeholder="Gender" name="gender"><option value="">Select Gender</option><option *ngFor="let val of Gender" >{{val}}</option></select>
+        </div>
+        <div class="col-md-3">
+          <input type="text" [(ngModel)]="employeeData.Email" required name="email" #email="ngModel" class="form-control" placeholder="Email" name="email"/>
+        </div>  
+        <div class="col-md-3">
+          <textarea [(ngModel)]="employeeData.Post" required name="post" #post="ngModel" style="resize:none" class="form-control" placeholder="Post" ></textarea>
+        </div>
+      </div>
+        <input type="file" class="form-control browse" [(ngModel)]="employeeData.ImageName" name="Image" (change)="getFiles($event)"/>
+      <div>
+        <img [src]="sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,'+fileString)" style="height:100px;width:100px" /><div>
+        <label style="height:40px;width:100px;position: relative;left: 45%" class="form-control" name="imageName" >{{imageName}}</label></div>
+      </div>
+      <div class="row form-group float-right">
+          <button class="btn btn-success" [disabled]="!empForm.form.valid" (click)="updateEmployee()" id="updateEmp">Update Data</button>
+          <!-- <button  class="btn btn-primary float-right" (click)="cancelPage()" >Cancel</button> -->
+          <input type=button  class="btn btn-primary float-right" [routerLink]="[ '/employees-list']" value=Cancel />
+      </div> 
+    </form>
     </div>
-    <a  class="btn btn-primary right float-right" [routerLink]="[ '/employees-list']">Cancel</a>
   </div>
-</div>

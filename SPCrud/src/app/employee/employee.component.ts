@@ -17,7 +17,8 @@ export class EmployeeComponent implements OnInit {
   bday:any=null;
   age:number=null;
   files:any=[];
-  filestring:any='';
+  fileString:any='';
+  fileName:any='';
   Gender=['Male','Female','Others']
   constructor(
     public sanitizer:DomSanitizer,
@@ -39,7 +40,7 @@ export class EmployeeComponent implements OnInit {
   // Add employee
   addEmployee() {
     delete this.employeeDetails.Age;
-    this.employeeDetails.Image=this.filestring;
+    this.employeeDetails.Image=this.fileString;
     this.restApi.createEmployee(this.employeeDetails).subscribe((data: {}) => {
       this.reset();
       this.loadEmployees();
@@ -98,19 +99,22 @@ export class EmployeeComponent implements OnInit {
   getFiles(event) {
     this.files = event.target.files;
     var reader = new FileReader();
+    let file = event.target.files[0];
+    this.fileName = file.name;
+    console.log(this.fileName)
     reader.onload = this._handleReaderLoaded.bind(this);
     reader.readAsBinaryString(this.files[0]);
-}
+    }
 
-_handleReaderLoaded(readerEvt) {
+  _handleReaderLoaded(readerEvt) {
     var binaryString = readerEvt.target.result;
-    this.filestring = btoa(binaryString);  // Converting binary string data.
+    this.fileString = btoa(binaryString);  // Converting binary string data.
     // this.transform(this.filestring);
-}
+  }
 
-// transform(imgvar){
-//   return this.sanitizer.bypassSecurityTrustResourceUrl(imgvar);
-// }
+  // transform(imgvar){
+  //   return this.sanitizer.bypassSecurityTrustResourceUrl(imgvar);
+  // }
   reset()
   {
     this.isEdit = false
