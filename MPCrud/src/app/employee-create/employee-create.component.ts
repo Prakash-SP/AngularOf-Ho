@@ -9,7 +9,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./employee-create.component.css']
 })
 export class EmployeeCreateComponent implements OnInit {
-  @Input() employeeDetails = { Id: '', Name: '',Dob:'',Age:null, Gender:'', Email: '', Post: '',Image:'',ImageName:'' };
+  @Input() employeeDetails = { Id: '', Name: '', Dob:'', Age:null, Gender:'', Email: '', MobileNo:null, Post: '', Image:'', ImageName:'' };
 
   bday:any=null;
   age:number=null;

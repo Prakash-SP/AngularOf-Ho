@@ -48,6 +48,7 @@ export class EmployeeUpdateComponent implements OnInit {
         this.employeeData.Gender = element.Gender
         this.employeeData.Email = element.Email
         this.employeeData.Post = element.Post
+        this.employeeData.MobileNo = element.MobileNo
         this.imageString = element.Image
         this.imageName = element.ImageName
         

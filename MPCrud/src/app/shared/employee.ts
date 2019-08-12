@@ -6,5 +6,7 @@ export class Employee {
   Email: string;
   Gender: string;
   Post: string;
+  MobileNo: number;
   Image: string;
+  ImageName: string;
 }

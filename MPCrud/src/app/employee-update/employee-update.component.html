@@ -4,7 +4,7 @@
       <form  #empForm="ngForm">
       <div class="row form-group">
         <div class="col-md-3">
-          <input type="text" [(ngModel)]="employeeData.Id" required name="eid" #eid="ngModel" class="form-control" placeholder="Emp Id" />
+          <label class="form-control" [(ngModel)]="employeeData.Id" name="empid" >{{employeeData.Id}}</label>
         </div>
         <div class="col-md-3">
           <input type="text" [(ngModel)]="employeeData.Name" required name="name" #name="ngModel" class="form-control" placeholder="Name"/>
@@ -18,11 +18,15 @@
       </div>
       <div class="row form-group">
         <div class="col-md-3">
-          <select [(ngModel)]="employeeData.Gender" required name="gender" #gender="ngModel" class="form-control" placeholder="Gender" name="gender"><option value="">Select Gender</option><option *ngFor="let val of Gender" >{{val}}</option></select>
+          <select [(ngModel)]="employeeData.Gender" required name="gender" #gender="ngModel" class="form-control" placeholder="Gender" name="gender">
+            <option value="">Select Gender</option><option *ngFor="let val of Gender" >{{val}}</option></select>
         </div>
         <div class="col-md-3">
-          <input type="text" [(ngModel)]="employeeData.Email" required name="email" #email="ngModel" class="form-control" placeholder="Email" name="email"/>
-        </div>  
+          <input type="text" [(ngModel)]="employeeData.Email" required name="email" #email="ngModel" class="form-control" placeholder="Email"/>
+        </div>
+        <div class="col-md-3">
+          <input type="text" [(ngModel)]="employeeData.MobileNo" required name="mobile" #mobile="ngModel" class="form-control" placeholder="Mobile No"/>
+        </div>
         <div class="col-md-3">
           <textarea [(ngModel)]="employeeData.Post" required name="post" #post="ngModel" style="resize:none" class="form-control" placeholder="Post" ></textarea>
         </div>
