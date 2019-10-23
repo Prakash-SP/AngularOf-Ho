@@ -28,6 +28,7 @@ export class EmployeeUpdateComponent implements OnInit {
 
   ngOnInit() {
     this.Id = this.actRoute.snapshot.queryParams['Id'];
+    
     this.fetchEmpData();
     this.restApi.getEmployee(this.Id).subscribe((data: {}) => {
     //this.employeeData = data;
@@ -38,8 +39,8 @@ export class EmployeeUpdateComponent implements OnInit {
   fetchEmpData() {
     // return this.restApi.getEmployee(this.Id).subscribe((data: {}) => {
       return this.restApi.getEmployee(this.Id).subscribe((data) => {
-      this.Employee = data;
-      this.Employee.forEach(element => {
+        this.Employee = data;
+        this.Employee.forEach(element => {
         this.employeeData.Id = element.Id
         this.employeeData.Name = element.Name
         this.employeeData.Dob = element.Dob
@@ -51,7 +52,6 @@ export class EmployeeUpdateComponent implements OnInit {
         this.employeeData.MobileNo = element.MobileNo
         this.imageString = element.Image
         this.imageName = element.ImageName
-        
       });
     });
   }
